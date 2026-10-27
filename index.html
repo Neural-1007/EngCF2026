@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Gilded Quill – English, Told in Shadow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0A0C;--panel:#141216;--red:#8B0000;--red2:#c1121f;--gold:#D4AF37;--ink:#ece4d3;--mute:#a79f8d;--h:'Cinzel Decorative','Cinzel',Georgia,serif;--b:'Plus Jakarta Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 1.05rem/1.7 var(--b);overflow-x:hidden}
+h1,h2,h3{font-family:var(--h);font-weight:700;line-height:1.15;letter-spacing:.02em}
+section{padding:7rem 6vw;position:relative}
+h2{font-size:clamp(1.9rem,4.5vw,3.2rem);color:var(--gold);margin-bottom:1rem;text-shadow:0 0 30px #d4af3744}
+.lead{max-width:62ch;color:var(--mute);margin-bottom:3rem}
+button{font:inherit;cursor:pointer}
+.btn{background:linear-gradient(#a10000,var(--red));color:var(--ink);border:1px solid var(--gold);padding:.7rem 1.6rem;font-family:var(--h);font-size:.85rem;border-radius:2px;transition:.25s}
+.btn:hover{box-shadow:0 0 24px #c1121f99;transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--red2),var(--gold));z-index:90}
+nav{position:fixed;top:0;right:0;left:0;z-index:80;display:flex;justify-content:space-between;align-items:center;padding:.9rem 5vw;background:linear-gradient(#0a0a0cdd,transparent)}
+nav b{font-family:var(--h);color:var(--gold);font-size:1.2rem}nav div{display:flex;gap:1.6rem}
+nav a{color:var(--ink);text-decoration:none;font-size:.9rem}nav a:hover{color:var(--gold)}
+#trail{position:fixed;inset:0;pointer-events:none;z-index:200}
+#dot{position:fixed;width:14px;height:14px;border-radius:50%;background:radial-gradient(#fff,var(--gold) 40%,transparent 70%);box-shadow:0 0 22px 6px #d4af3777;pointer-events:none;z-index:201;transform:translate(-50%,-50%)}
+@media(hover:hover){body,a,button,.card,.fc{cursor:none}}
+@media(hover:none){#dot{display:none}}
+/* hero + curtain */
+#hero{height:230vh;padding:0}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:center;text-align:center;background:radial-gradient(ellipse at 50% 40%,#3a0a10 0,var(--bg) 65%)}
+.arch{position:absolute;width:min(46vw,460px);height:78vh;bottom:0;border:2px solid #d4af3766;border-bottom:0;border-radius:50% 50% 0 0/36% 36% 0 0;background:radial-gradient(ellipse at 50% 25%,#c1121f44,transparent 70%);box-shadow:0 0 90px #8b000088 inset}
+.hc{position:relative;z-index:2;padding:0 6vw}
+.hc h1{font-size:clamp(2.4rem,7.5vw,6rem);color:var(--ink);text-shadow:0 0 40px #c1121f88}
+.hc p{max-width:52ch;margin:1.4rem auto 2rem;color:var(--mute)}
+.cur{position:absolute;top:0;bottom:0;width:51%;z-index:5;pointer-events:none;
+background:repeating-linear-gradient(90deg,#5a0008 0,#9b0a14 28px,#6b000a 56px,#3d0006 80px);box-shadow:0 0 60px #000}
+.cur::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0009,transparent 30%,transparent 70%,#0009)}
+.cur.l{left:0;transform-origin:0 50%;border-right:4px solid var(--gold)}.cur.r{right:0;transform-origin:100% 50%;border-left:4px solid var(--gold)}
+.hint{position:absolute;z-index:6;bottom:8vh;left:0;right:0;text-align:center;font-family:var(--h);color:var(--gold);letter-spacing:.2em;animation:pulse 2s infinite;pointer-events:none}
+@keyframes pulse{50%{opacity:.35}}
+/* history timeline */
+.tl{border-left:2px solid #d4af3755;margin-left:.5rem;max-width:760px}
+.tl div{padding:0 0 2rem 2rem;position:relative}
+.tl div::before{content:"";position:absolute;left:-7px;top:.5rem;width:12px;height:12px;background:var(--red2);border:2px solid var(--gold);transform:rotate(45deg)}
+.tl h3{font-size:1.1rem;color:var(--ink)}.tl small{color:var(--gold);font-family:var(--h)}.tl p{color:var(--mute)}
+/* fan carousel */
+#colleges{overflow:hidden;text-align:center}#colleges .lead{margin-inline:auto}
+.fan{position:relative;height:560px;margin:2rem auto 0;max-width:1000px}
+.fc{position:absolute;left:50%;bottom:0;width:300px;margin-left:-150px;background:var(--panel);border:1px solid #d4af3766;border-radius:6px;overflow:hidden;text-align:left;transform-origin:50% 130%;transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .6s,opacity .6s;box-shadow:0 20px 50px #000}
+.fc .pic{height:190px;background:linear-gradient(135deg,#3a0a10,#12090b);display:grid;place-items:center;font:700 2.6rem var(--h);color:var(--gold);position:relative}
+.fc .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fc .in{padding:1rem 1.1rem 1.2rem;font-size:.88rem;line-height:1.5}
+.fc h3{font-size:1.02rem;color:var(--gold);margin-bottom:.2rem}.fc .city{color:var(--mute);margin-bottom:.6rem}
+.fc b{color:var(--ink)}.fc p{margin-top:.4rem;color:var(--mute)}
+.nav2{display:flex;gap:1rem;justify-content:center;margin-top:1.5rem}
+.note{font-size:.8rem;color:var(--mute);margin-top:1.5rem}
+/* spotlight carousel */
+#careers{background:#07070a}
+.spot{position:relative;--mx:50%;--my:50%}
+.track{display:flex;gap:1.4rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:1rem 0 2rem;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.card{flex:0 0 300px;min-height:340px;scroll-snap-align:center;background:var(--panel);border:1px solid #ffffff14;border-radius:6px;padding:1.6rem;position:relative;overflow:hidden;transition:transform .2s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--cx,50%) var(--cy,50%),#d4af3733,transparent 70%);opacity:0;transition:.3s}
+.card:hover::before{opacity:1}.card:hover{border-color:#d4af3788}
+.card .ic{font-size:2.4rem}.card h3{color:var(--gold);font-size:1.1rem;margin:.8rem 0 .5rem}.card p{color:var(--mute);font-size:.92rem}.card .pay{margin-top:1rem;color:var(--ink);font-size:.82rem}
+.spot::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle 340px at var(--mx) var(--my),transparent 0,#07070acc 100%);transition:opacity .3s}
+/* games */
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.2rem}
+.g{background:var(--panel);border:1px solid #d4af3744;padding:1.5rem;border-radius:6px;text-align:left;color:var(--ink);transition:transform .15s,border-color .3s;transform-style:preserve-3d}
+.g:hover{border-color:var(--gold);box-shadow:0 0 30px #8b000088}
+.g h3{color:var(--gold);font-size:1rem;margin:.5rem 0}.g p{font-size:.85rem;color:var(--mute)}
+#ov{position:fixed;inset:0;background:#000d;z-index:150;display:none;place-items:center;padding:1rem;backdrop-filter:blur(6px)}
+#ov.on{display:grid}
+.box{background:#100d12;border:1px solid var(--gold);border-radius:8px;width:min(760px,100%);max-height:90vh;overflow:auto;padding:2rem;position:relative;box-shadow:0 0 80px #8b000088}
+.box h3{color:var(--gold);font-size:1.4rem;margin-bottom:1rem;padding-right:2rem}
+.x{position:absolute;top:.7rem;right:.9rem;background:none;border:0;color:var(--gold);font-size:1.6rem}
+input,textarea,select{width:100%;background:#0a0a0c;border:1px solid #d4af3755;color:var(--ink);padding:.7rem;border-radius:3px;font:inherit;margin:.3rem 0 .8rem}
+.out{white-space:pre-wrap;background:#0a0a0c;border-left:3px solid var(--red2);padding:1rem 1.2rem;margin:1rem 0;min-height:3rem}
+.opts{display:grid;gap:.6rem;margin-top:.8rem}.opts .btn{text-align:left;text-transform:none;font-family:var(--b)}
+.err{color:#ff7b7b}
+.tilt{background:linear-gradient(135deg,#2a1a0c,#1a0f08);border:1px solid var(--gold);padding:1.4rem;border-radius:6px;transition:transform .1s;color:#f1e3c0;white-space:pre-wrap;font-family:Georgia,serif}
+.holo{background:linear-gradient(120deg,#8b000044,#d4af3733,#4a2a8a44);border:1px solid var(--gold);padding:1.4rem;border-radius:8px;animation:sh 4s infinite alternate;box-shadow:0 0 40px #d4af3755}
+@keyframes sh{to{box-shadow:0 0 70px #c1121faa}}
+.case{position:relative}.hid{position:absolute;right:1rem;bottom:.6rem;font-size:.85rem;color:var(--gold);-webkit-mask-image:radial-gradient(circle 80px at var(--lx,-200px) var(--ly,-200px),#000,transparent);mask-image:radial-gradient(circle 80px at var(--lx,-200px) var(--ly,-200px),#000,transparent)}
+#lens{position:absolute;width:160px;height:160px;border:3px solid var(--gold);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);display:none;box-shadow:0 0 25px #d4af37aa}
+/* feedback */
+footer{padding:3rem 6vw;text-align:center;color:var(--mute);border-top:1px solid #d4af3733}
+#fb{position:fixed;inset:0;z-index:160;background:#000c;display:none;place-items:center;padding:1rem}#fb.on{display:grid}
+@media(max-width:640px){nav div{display:none}.fc{width:250px;margin-left:-125px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style></head><body>
+<canvas id="trail"></canvas><div id="dot"></div><div id="bar"></div>
+<nav><b>The Gilded Quill</b><div><a href="#history">History</a><a href="#colleges">Colleges</a><a href="#careers">Careers</a><a href="#games">Games</a></div><button class="btn ghost" id="keyBtn">Gemini key</button></nav>
+
+<header id="hero"><div class="stage">
+ <div class="arch"></div>
+ <div class="hc"><h1>Words Outlive Kingdoms</h1><p>The story of English, the careers it opens, and the Indian colleges where you can study it.</p><a class="btn" href="#history">Begin the Study</a></div>
+ <div class="cur l" id="cl"></div><div class="cur r" id="cr"></div>
+ <div class="hint" id="hint">Scroll to draw the curtain</div>
+</div></header>
+
+<section id="history"><h2>A Brief History of English</h2>
+<p class="lead">From a Germanic dialect on a foggy island to a language of a billion voices, English has been rewritten by every conquest, printing press and revolution.</p>
+<div class="tl">
+<div><small>c. 450–1150</small><h3>Old English</h3><p>Anglo-Saxon settlers bring the tongue that gives us <i>Beowulf</i> and our oldest everyday words.</p></div>
+<div><small>1150–1500</small><h3>Middle English</h3><p>After the Norman Conquest, French floods in. Chaucer writes <i>The Canterbury Tales</i> in the language of the people.</p></div>
+<div><small>1500–1700</small><h3>The Renaissance</h3><p>Printing standardises spelling. Shakespeare coins hundreds of words and the King James Bible shapes the cadence of prose.</p></div>
+<div><small>1700–1900</small><h3>Enlightenment to Gothic Romance</h3><p>Johnson compiles his Dictionary; Austen, the Brontës, Shelley and Stoker give fiction its shadows.</p></div>
+<div><small>1835–1857</small><h3>English arrives in India</h3><p>Macaulay's Minute (1835) and Wood's Despatch (1854) lead to the universities of Calcutta, Bombay and Madras in 1857.</p></div>
+<div><small>1900–today</small><h3>Many Englishes</h3><p>Tagore, R.K. Narayan, Rushdie, Roy and Ghosh make Indian writing in English a world literature of its own.</p></div>
+</div></section>
+
+<section id="colleges"><h2>Where to Study English in India</h2>
+<p class="lead">Seven celebrated colleges and universities. Click a card or use the arrows to bring it forward.</p>
+<div class="fan" id="fan"></div>
+<div class="nav2"><button class="btn ghost" id="pv" aria-label="Previous college">‹ Previous</button><button class="btn ghost" id="nx" aria-label="Next college">Next ›</button></div>
+<p class="note">Admission rules change every year. Please confirm degrees and exams on each college's official website.</p></section>
+
+<section id="careers"><h2>Careers with an English Degree</h2>
+<p class="lead">Move your cursor across the dark. The spotlight shows you what is waiting.</p>
+<div class="spot" id="spot"><div class="track" id="track"></div></div>
+<div class="nav2"><button class="btn ghost" id="cp" aria-label="Previous">‹</button><button class="btn ghost" id="cn" aria-label="Next">›</button></div></section>
+
+<section id="games" style="text-align:center"><h2>The Gaming Hall</h2>
+<p class="lead" style="margin-inline:auto">Five games powered by Gemini. Add your Google AI Studio key once (top right) and play.</p>
+<div class="games" id="gl"></div></section>
+
+<footer><p>The Gilded Quill · Made for readers, writers and the curious.</p><div id="end" style="height:2px"></div></footer>
+
+<div id="ov"><div class="box"><button class="x" id="gx" aria-label="Close">×</button><h3 id="gt"></h3><div id="gb"></div></div></div>
+
+<div id="fb"><div class="box"><button class="x" id="fx" aria-label="Close">×</button><h3>Leave a word before you go</h3>
+<form id="ff"><label>Your name<input name="name" required></label>
+<label>How was your visit?<select name="rating"><option>★★★★★ Superb</option><option>★★★★ Good</option><option>★★★ Fair</option><option>★★ Poor</option></select></label>
+<label>Your feedback<textarea name="message" rows="4" required></textarea></label>
+<button class="btn" type="submit">Send feedback</button> <span id="fs"></span></form></div></div>
+
+<script>
+/* ===== CONFIG ===== */
+const MODEL='gemini-3.8-flash';
+const FEEDBACK_ENDPOINT='https://formsubmit.co/ajax/leafxninja60@gmail.com'; // swap for https://formspree.io/f/YOUR_ID if you prefer Formspree
+const COLLEGES=[
+{n:"St. Xavier's College",c:"Mumbai",img:"",deg:"BA English · MA English",ex:"Merit-based admission (Class 12 marks) via the college's own process"},
+{n:"St. Stephen's College",c:"New Delhi",img:"",deg:"BA (Hons) English",ex:"CUET-UG score, plus the college's interview round"},
+{n:"Miranda House",c:"New Delhi",img:"",deg:"BA (Hons) English · MA English (via DU)",ex:"CUET-UG (UG) · DU PG entrance (MA)"},
+{n:"Loyola College",c:"Chennai",img:"",deg:"BA English Literature · MA English",ex:"Merit-based, college's own application process"},
+{n:"Presidency University",c:"Kolkata",img:"",deg:"BA (Hons) English · MA English",ex:"University admission process / CUET-UG (UG) · own entrance (PG)"},
+{n:"EFLU",c:"Hyderabad",img:"",deg:"BA (Hons) English Studies · MA English Literature · MA ELT",ex:"CUET-UG (UG) · EFLU Entrance Test (PG)"},
+{n:"Christ University",c:"Bengaluru",img:"",deg:"BA English (with Journalism / Psychology combos) · MA English",ex:"Christ University Entrance Test + interview"}];
+const CAREERS=[
+["","Editor & Publisher","Shape manuscripts into books at presses, magazines and digital imprints.","₹4–15 LPA"],
+["","UX Writer & Content Strategist","Write the words inside apps, and decide what a brand should say.","₹6–25 LPA"],
+["","Journalist","Report, investigate and narrate the news across print, TV and the web.","₹3–14 LPA"],
+["","Literary Curator & Archivist","Care for manuscripts and run festivals, libraries and museums.","₹3–10 LPA"],
+["","Narrative Game Designer","Build the worlds, dialogue and branching plots players live in.","₹5–22 LPA"],
+["","Professor & Researcher","Teach and publish after an MA, M.Phil or PhD; UGC-NET opens the way.","₹5–20 LPA"],
+["","Copywriter & Brand Voice","Give ads, scripts and campaigns a voice people remember.","₹4–18 LPA"]];
+const $=s=>document.querySelector(s);
+
+/* ===== cursor + ember trail ===== */
+const cv=$('#trail'),cx=cv.getContext('2d'),P=[];let mx=0,my=0;
+function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener('resize',rs);
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;$('#dot').style.left=mx+'px';$('#dot').style.top=my+'px';
+ for(let i=0;i<2;i++)P.push({x:mx,y:my,vx:(Math.random()-.5)*1.2,vy:-Math.random()*1.5-.3,l:1,c:Math.random()<.5?'212,175,55':'193,18,31'})});
+(function t(){cx.clearRect(0,0,cv.width,cv.height);for(let i=P.length-1;i>=0;i--){const p=P[i];p.x+=p.vx;p.y+=p.vy;p.l-=.02;
+ if(p.l<=0){P.splice(i,1);continue}cx.fillStyle=`rgba(${p.c},${p.l})`;cx.shadowColor=`rgb(${p.c})`;cx.shadowBlur=10;cx.beginPath();cx.arc(p.x,p.y,2.2*p.l,0,7);cx.fill()}requestAnimationFrame(t)})();
+
+/* ===== scroll: progress bar + curtain ===== */
+const cl=$('#cl'),cr=$('#cr');
+function onScroll(){const h=document.documentElement.scrollHeight-innerHeight;$('#bar').style.width=(scrollY/h*100)+'%';
+ const p=Math.min(1,scrollY/(innerHeight*.9)),e=p*p*(3-2*p);
+ cl.style.transform=`translateX(${-e*102}%) scaleX(${1-e*.35})`;cr.style.transform=`translateX(${e*102}%) scaleX(${1-e*.35})`;$('#hint').style.opacity=Math.max(0,1-p*4)}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* ===== fan carousel ===== */
+let ai=3;const fan=$('#fan');
+COLLEGES.forEach((c,i)=>{const d=document.createElement('div');d.className='fc';
+ d.innerHTML=`<div class="pic">${c.n.split(' ').map(w=>w[0]).slice(0,2).join('')}${c.img?`<img src="${c.img}" alt="${c.n}" onerror="this.remove()">`:''}</div><div class="in"><h3>${c.n}</h3><div class="city">${c.c}</div><b>Degrees:</b> ${c.deg}<p><b>Entrance:</b> ${c.ex}</p></div>`;
+ d.onclick=()=>{ai=i;fanDraw()};fan.appendChild(d)});
+function fanDraw(){[...fan.children].forEach((d,i)=>{const o=i-ai,a=Math.abs(o);
+ d.style.transform=`translateX(${o*70}px) rotate(${o*9}deg) translateY(${a?a*14:-10}px) scale(${a?1-a*.04:1.04})`;
+ d.style.zIndex=20-a;d.style.filter=a?`brightness(${1-a*.12})`:'none';d.style.opacity=a>4?0:1})}
+$('#pv').onclick=()=>{ai=Math.max(0,ai-1);fanDraw()};$('#nx').onclick=()=>{ai=Math.min(COLLEGES.length-1,ai+1);fanDraw()};
+fan.addEventListener('wheel',e=>{if(Math.abs(e.deltaX)>Math.abs(e.deltaY)){e.preventDefault();ai=Math.max(0,Math.min(COLLEGES.length-1,ai+(e.deltaX>0?1:-1)));fanDraw()}},{passive:false});
+fanDraw();
+
+/* ===== spotlight carousel ===== */
+const tr=$('#track'),sp=$('#spot');
+CAREERS.forEach(c=>{tr.insertAdjacentHTML('beforeend',`<div class="card"><div class="ic">${c[0]}</div><h3>${c[1]}</h3><p>${c[2]}</p><div class="pay">Typical range: ${c[3]}</div></div>`)});
+sp.addEventListener('mousemove',e=>{const r=sp.getBoundingClientRect();sp.style.setProperty('--mx',e.clientX-r.left+'px');sp.style.setProperty('--my',e.clientY-r.top+'px');
+ document.querySelectorAll('.card').forEach(c=>{const b=c.getBoundingClientRect();c.style.setProperty('--cx',e.clientX-b.left+'px');c.style.setProperty('--cy',e.clientY-b.top+'px')})});
+$('#cp').onclick=()=>tr.scrollBy({left:-320,behavior:'smooth'});$('#cn').onclick=()=>tr.scrollBy({left:320,behavior:'smooth'});
+
+/* ===== 3D tilt for any .tilt/.g ===== */
+document.addEventListener('mousemove',e=>{const t=e.target.closest('.tilt,.g,.holo');document.querySelectorAll('.tilt,.g,.holo').forEach(n=>{if(n!==t)n.style.transform=''});
+ if(t){const r=t.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.transform=`perspective(700px) rotateY(${x*14}deg) rotateX(${-y*14}deg)`}});
+
+/* ===== Gemini ===== */
+function askKey(){const k=prompt('Paste your Google AI Studio API key (kept only in this browser):',localStorage.getItem('gk')||'');if(k!==null)localStorage.setItem('gk',k.trim())}
+$('#keyBtn').onclick=askKey;
+async function gem(contents,json){let k=localStorage.getItem('gk');if(!k){askKey();k=localStorage.getItem('gk');if(!k)throw Error('Add your Gemini API key first (top right).')}
+ const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${k}`,{method:'POST',headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({contents,generationConfig:json?{responseMimeType:'application/json'}:{}})});
+ const d=await r.json();if(!r.ok)throw Error(d.error?.message||'Gemini request failed');
+ const t=d.candidates[0].content.parts.map(p=>p.text).join('');return json?JSON.parse(t.replace(/```json|```/g,'')):t}
+const U=t=>({role:'user',parts:[{text:t}]}),M=t=>({role:'model',parts:[{text:t}]});
+async function typeInto(el,text,sp=14){el.textContent='';for(const ch of text){el.textContent+=ch;await new Promise(r=>setTimeout(r,sp))}}
+const gb=$('#gb');
+function openGame(i){$('#gt').textContent=GAMES[i].t;gb.innerHTML='';$('#ov').classList.add('on');GAMES[i].f()}
+function wrap(fn){return async e=>{const b=e.currentTarget;b.disabled=true;try{await fn()}catch(x){gb.insertAdjacentHTML('beforeend',`<p class="err">${x.message}</p>`)}b.disabled=false}}
+$('#gx').onclick=()=>$('#ov').classList.remove('on');
+
+/* 1 Scribe's Trial */
+function scribe(){let hist=[];const out=document.createElement('div');out.className='out';const op=document.createElement('div');op.className='opts';gb.append(out,op);
+ async function step(choice){op.innerHTML='';out.textContent='The ink is still wet…';
+  const sys='You write a dark-fantasy Gothic quest in Victorian prose, readable by any student. Return JSON {"story":"<80-110 words>","choices":["..","..",".."]}. After about 6 turns, end the tale with choices [].';
+  hist.push(U(hist.length?`The reader chooses: ${choice}`:sys+' Begin the tale.'));
+  const r=await gem(hist,true);hist.push(M(JSON.stringify(r)));await typeInto(out,r.story);
+  r.choices.forEach(c=>{const b=document.createElement('button');b.className='btn';b.textContent=c;b.onclick=wrap(()=>step(c));op.append(b)});
+  if(!r.choices.length)op.innerHTML='<p>The tale is told. Close and reopen for a new one.</p>'}
+ step().catch(x=>out.innerHTML=`<span class="err">${x.message}</span>`)}
+
+/* 2 Etymology */
+function etym(){gb.innerHTML=`<input id="w" placeholder="Type a word, or leave empty for a mystery word"><button class="btn" id="go">Unearth it</button><div id="r"></div>`;
+ $('#go').onclick=wrap(async()=>{const w=$('#w').value.trim(),r=$('#r');r.innerHTML='<p>Digging…</p>';
+  const j=await gem([U(`${w?`Word: "${w}".`:'Pick an interesting, little-known English word.'} Return JSON {"word":"","origin":"2-4 sentence plain-English history with root languages","roots":["root → meaning"],"riddle":"a quiz question about the word","options":["a","b","c","d"],"answer":0}`)],true);
+  r.innerHTML=`<div class="out"><b>${j.word}</b>\n${j.origin}\n\n${j.roots.join('\n')}</div><p>${j.riddle}</p><div class="opts"></div>`;
+  j.options.forEach((o,i)=>{const b=document.createElement('button');b.className='btn';b.textContent=o;b.onclick=()=>{b.textContent+=i==j.answer?'  ✔ Correct':'  ✘ Not quite'};r.lastChild.append(b)})})}
+
+/* 3 Bard's Mirror */
+function bard(){gb.innerHTML=`<select id="m"><option>Write a Shakespearean sonnet</option><option>Write a Gothic Romantic poem</option><option>Critique my writing style</option></select><textarea id="t" rows="4" placeholder="A theme, mood or snippet of your own writing"></textarea><button class="btn" id="go">Consult the mirror</button><div id="r"></div>`;
+ $('#go').onclick=wrap(async()=>{const t=$('#t').value.trim();if(!t)throw Error('Give the mirror something to read.');
+  const x=await gem([U(`${$('#m').value} based on this: "${t}". Keep it under 200 words.`)]);$('#r').innerHTML='<div class="tilt"></div>';$('#r').firstChild.textContent=x})}
+
+/* 4 Career Oracle */
+function oracle(){const q=[['A cherished place?',['Ancient library','Stormy coast','Busy city','Quiet garden']],['Your strongest gift?',['Telling stories','Spotting detail','Persuading others','Imagining worlds']],['A perfect evening?',['Reading alone','Debating friends','Making something','Exploring somewhere new']]];
+ gb.innerHTML=q.map((x,i)=>`<label>${x[0]}<select id="q${i}">${x[1].map(o=>`<option>${o}</option>`).join('')}</select></label>`).join('')+`<textarea id="bio" rows="2" placeholder="Optional: a short bio"></textarea><button class="btn" id="go">Read my fate</button><div id="r"></div>`;
+ $('#go').onclick=wrap(async()=>{const a=q.map((x,i)=>x[0]+' '+$('#q'+i).value).join('; ');
+  const j=await gem([U(`Answers: ${a}. Bio: ${$('#bio').value}. Match this student to one unexpected career path for an English graduate. Return JSON {"title":"","why":"2 sentences","path":"3 concrete steps, including India-relevant ones"}`)],true);
+  $('#r').innerHTML='<div class="holo"></div>';$('#r').firstChild.innerHTML=`<h3>${j.title}</h3><p></p><p></p>`;const p=$('#r').querySelectorAll('p');p[0].textContent=j.why;p[1].textContent=j.path})}
+
+/* 5 Cipher of Oxford */
+function cipher(){let secret,hist=[];gb.innerHTML=`<div class="out case" id="cs">Opening the archive…<div class="hid" id="hd"></div><div id="lens"></div></div><input id="qq" placeholder="Ask a question about the case"><button class="btn" id="ask">Ask</button><div class="opts" id="ac"></div><div id="rp"></div>`;
+ const cs=$('#cs');cs.addEventListener('mousemove',e=>{const r=cs.getBoundingClientRect(),l=$('#lens');l.style.display='block';l.style.left=e.clientX-r.left+'px';l.style.top=e.clientY-r.top+'px';cs.style.setProperty('--lx',e.clientX-r.left+'px');cs.style.setProperty('--ly',e.clientY-r.top+'px')});
+ cs.addEventListener('mouseleave',()=>{$('#lens').style.display='none';cs.style.setProperty('--lx','-200px')});
+ gem([U('Create a short mystery in a historic Indian-university archive. Return JSON {"intro":"60 words","suspects":["name: trait","..","."],"culprit":0,"clue":"one hidden clue, max 12 words"}')],true).then(j=>{secret=j;cs.firstChild.textContent=j.intro;$('#hd').textContent=j.clue;
+  hist=[U(`You are the game master. Secret: culprit is suspect #${j.culprit} of ${JSON.stringify(j.suspects)}; clue: ${j.clue}. Answer questions in 1-3 sentences with hints but never name the culprit.`),M('Understood.')];
+  j.suspects.forEach((s,i)=>{const b=document.createElement('button');b.className='btn';b.textContent='Accuse '+s;b.onclick=()=>{$('#rp').innerHTML=`<p>${i==j.culprit?'✔ You solved the Cipher of Oxford!':'✘ Wrong accusation. The culprit was '+j.suspects[j.culprit]+'.'}</p>`};$('#ac').append(b)})}).catch(x=>cs.innerHTML=`<span class="err">${x.message}</span>`);
+ $('#ask').onclick=wrap(async()=>{const q=$('#qq').value.trim();if(!q||!secret)return;hist.push(U(q));const a=await gem(hist);hist.push(M(a));$('#rp').insertAdjacentHTML('afterbegin','<div class="out"></div>');$('#rp').firstChild.textContent='You: '+q+'\n'+a;$('#qq').value=''})}
+
+const GAMES=[{t:"The Scribe's Trial",i:'',d:'A branching Gothic story that you steer.',f:scribe},{t:'Etymology & Antiquity',i:'',d:'Dig up the origins of any word and duel with a riddle.',f:etym},{t:"The Bard's Mirror",i:'',d:'Turn your theme into sonnets, or get your writing critiqued.',f:bard},{t:'Career Oracle',i:'',d:'Three questions reveal your unexpected English career.',f:oracle},{t:'The Cipher of Oxford',i:'',d:'Question the archive and name the culprit.',f:cipher}];
+GAMES.forEach((g,i)=>{const b=document.createElement('button');b.className='g';b.innerHTML=`<div style="font-size:2rem">${g.i}</div><h3>${g.t}</h3><p>${g.d}</p>`;b.onclick=()=>openGame(i);$('#gl').append(b)});
+
+/* ===== feedback modal at end of page ===== */
+let shown=false;new IntersectionObserver(es=>{if(es[0].isIntersecting&&!shown){shown=true;setTimeout(()=>$('#fb').classList.add('on'),600)}}).observe($('#end'));
+$('#fx').onclick=()=>$('#fb').classList.remove('on');
+$('#ff').onsubmit=async e=>{e.preventDefault();const f=e.target,s=$('#fs');s.textContent='Sending…';
+ try{const body=Object.fromEntries(new FormData(f));body._subject='Gilded Quill feedback';body._captcha='false';
+  const r=await fetch(FEEDBACK_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)});
+  if(!r.ok)throw 0;s.textContent='Thank you. Your feedback was sent.';f.reset();setTimeout(()=>$('#fb').classList.remove('on'),1800)}catch{s.textContent='Could not send. Please try again.'}};
+addEventListener('keydown',e=>{if(e.key==='Escape'){$('#ov').classList.remove('on');$('#fb').classList.remove('on')}});
+</script></body></html>
